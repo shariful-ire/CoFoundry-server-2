@@ -1,0 +1,9 @@
+// Usage: requireRole('admin') or requireRole('founder', 'admin')
+export function requireRole(...roles) {
+  return (req, res, next) => {
+    if (!roles.includes(req.user?.role)) {
+      return res.status(403).json({ message: 'Forbidden' });
+    }
+    next();
+  };
+}
